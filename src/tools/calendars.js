@@ -43,6 +43,17 @@ export const frenchRepublican_day_of_week = [
     'décadi',
 ]
 
+export const gregorian_day_of_week = [
+    'dimanche',
+    'lundi',
+    'mardi',
+    'mercredi',
+    'jeudi',
+    'vendredi',
+    'samedi',
+    'dimanche',
+]
+
 export const frenchRepublican_months = [
     'vendémiaire', 'brumaire', 'frimaire',
     'nivôse', 'pluviôse', 'ventôse',
@@ -72,7 +83,9 @@ export const sans_culottides_prefixe = [
 const pad = (/** @type{String}*/data, n) => `${data}`.padStart(n, '0')
 
 export const get_long_gregorian_string = (year, month, day) => {
-    return `${day} ${gregorian_months[month-1]} ${year}`
+    const dayOfWeek = (new Date(get_iso_string(year, month, day))).getDay()
+    
+    return `${gregorian_day_of_week[dayOfWeek]} ${day} ${gregorian_months[month-1]} ${year}`
 }
 
 export const get_standard_gregorian_string = (year, month, day) => {
@@ -92,7 +105,7 @@ export const get_gedcom_string = (year, month, day) => {
 }
 
 export const get_long_frenchRepublican_string = (year, month, day) => {
-    return `${day} ${frenchRepublican_months[month-1]} an ${stringify(year)} (${year})`
+    return `${frenchRepublican_day_of_week[(day-1)%10]} ${day} ${frenchRepublican_months[month-1]} an ${stringify(year)} (${year})`
 }
 
 export const get_standard_frenchRepublican_string = (year, month, day) => {

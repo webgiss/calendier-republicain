@@ -3,10 +3,10 @@ import { Input } from 'semantic-ui-react'
 const CopyField = ({ text, onCopy }) => {
     onCopy = onCopy ? onCopy : (text) => {}
     return (
-        <Input
+        <Input 
             fluid
             className='CopyField'
-            readonly
+            readOnly
             value={text}
             action={{
                 color: 'blue',
