@@ -48,5 +48,6 @@
     ]
   },
   "license": "MIT",
-  "author": "gissehel"
+  "author": "gissehel",
+  "packageManager": "yarn@3.2.1"
 }
