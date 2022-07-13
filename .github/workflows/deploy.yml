@@ -16,7 +16,7 @@ jobs:
             - name : "Configure git"
               run : |
                   git config "user.name" "github-actions"
-                  git config "user.email" "public-dev-github-actions-calendier_republicain@gissehel.org"
+                  git config "user.email" "public-dev-github-actions-calendier-republicain@gissehel.org"
 
             - name: "Set environment variables"
               run: |
@@ -35,17 +35,17 @@ jobs:
             - name: "Build"
               run: |
                   yarn
-                  PUBLIC_URL=/calendier_republicain yarn build
+                  PUBLIC_URL=/calendier-republicain yarn build
                   # yarn build-storybook
                   # yarn test:html
 
-            - name: "Create calendier_republicain assets"
+            - name: "Create calendier-republicain assets"
               run: |
                   ref="${{ github.ref }}"
 
-                  site_name="calendier_republicain-site-${ref#refs/tags/v*}"
-                  # storybook_name="calendier_republicain-storybook-${ref#refs/tags/v*}"
-                  # test_name="calendier_republicain-test-${ref#refs/tags/v*}"
+                  site_name="calendier-republicain-site-${ref#refs/tags/v*}"
+                  # storybook_name="calendier-republicain-storybook-${ref#refs/tags/v*}"
+                  # test_name="calendier-republicain-test-${ref#refs/tags/v*}"
 
                   mv "build" "${site_name}"
                   zip -r "${site_name}.zip" "${site_name}"
@@ -62,7 +62,7 @@ jobs:
 
             - name: "Move storybook to build dir"
               run: |
-                  # echo "calendier_republicain.top" > build/CNAME
+                  # echo "calendier-republicain.top" > build/CNAME
                   # mv storybook build/storybook
                   # mkdir -p build/test
                   # mv test.html build/test/index.html
@@ -84,8 +84,8 @@ jobs:
                   body:
                   body_path: doc/releases/${{ env.REFNAME }}.md
                   files: |
-                    calendier_republicain-*.zip
-                    calendier_republicain-*.tar.gz
-                    calendier_republicain-*.html
+                    calendier-republicain-*.zip
+                    calendier-republicain-*.tar.gz
+                    calendier-republicain-*.html
                   draft: false
                   prerelease: false
