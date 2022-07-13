@@ -4160,9 +4160,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"calendrier-revolutionnaire@workspace:.":
+"calendrier-republicain@workspace:.":
   version: 0.0.0-use.local
-  resolution: "calendrier-revolutionnaire@workspace:."
+  resolution: "calendrier-republicain@workspace:."
   dependencies:
     "@reduxjs/toolkit": ^1.8.1
     "@testing-library/jest-dom": ^5.14.1
