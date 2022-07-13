@@ -1,9 +1,9 @@
 .PHONY: build run rm milestone-release release
 
-IMAGE_NAME=local-calendier_republicain-image
-CONTAINER_NAME=local-calendier_republicain
+IMAGE_NAME=local-calendrier-republicain-image
+CONTAINER_NAME=local-calendrier-republicain
 
-VERSION_CHECKER=yarn info -R --json | grep "calendier_republicain@workspace:." | jq -M '.children.Version' | sed -e 's/"//g'
+VERSION_CHECKER=yarn info -R --json | grep "calendrier-republicain@workspace:." | jq -M '.children.Version' | sed -e 's/"//g'
 APP_VERSION=$(shell $(VERSION_CHECKER))
 WORKING_DIR=$(shell pwd)
 
