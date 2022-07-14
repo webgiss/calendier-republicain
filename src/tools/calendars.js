@@ -31,7 +31,7 @@ export const gedcom_months = [
 ]
 
 export const frenchRepublican_day_of_week = [
-    'pimidi',
+    'primidi',
     'duodi',
     'tridi',
     'quartidi',
