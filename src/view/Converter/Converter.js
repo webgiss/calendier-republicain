@@ -1,7 +1,9 @@
 import './Converter.css'
 import {
     Segment, Menu, Dropdown,
-    // Button, Select, 
+    Button,
+    // Select, 
+    Input,
     Icon, Grid, Divider,
 } from 'semantic-ui-react'
 import {
@@ -32,9 +34,10 @@ const Converter = ({
     freeInput,
     onGregorianChanged,
     onFrenchRepublicanChanged,
-    onFreeInputChanged
+    onFreeInputChanged,
+    onClose
 }) => {
-    const year_to_string = (n) => n === null ? '' : `An ${stringify(n)}`
+    const year_to_string = (n) => n === null ? '' : `An ${n > 0 ? stringify(n) : stringify(1-n) + ' av. rép.'}`
 
     exportOnWindow({ year_to_string })
     const gregorian_days_options = createOptions([...new Array(31).keys()].map(x => x + 1))
@@ -56,20 +59,22 @@ const Converter = ({
     const gregorian_month_default = gregorian_month !== null ? gregorian_months_options[gregorian_month - 1].value : undefined
     const frenchRepublican_month_default = frenchRepublican_month !== null ? frenchRepublican_months_options[frenchRepublican_month - 1].value : undefined
 
-    let frenchRepublican_year_default = frenchRepublican_year === null ? year_to_string(frenchRepublican_year) : ''
     if (frenchRepublican_year !== null) {
-        if (frenchRepublican_year >= 1 + 14) {
+        if (frenchRepublican_year < 1) {
+            frenchRepublican_years_options.unshift(createFunctionOption(frenchRepublican_year, year_to_string))
+        } else if (frenchRepublican_year >= 1 + 14) {
             frenchRepublican_years_options.push(createFunctionOption(frenchRepublican_year, year_to_string))
         }
     }
 
-    console.log({ gregorian_month_default, frenchRepublican_month_default, frenchRepublican_year_default })
-    console.log({ gregorian_day, gregorian_month_default, gregorian_year })
-    console.log({ frenchRepublican_day, frenchRepublican_month_default, frenchRepublican_year })
     return (
         <Segment inverted color='grey' className="Converter">
+            <div className='ConverterCloseButton'>
+                <Button size='tiny' color='red' icon='close' onClick={onClose} />
+            </div>
+
             {
-                /*
+
                 <Input
                     fluid
                     className='ConverterInput'
@@ -77,7 +82,7 @@ const Converter = ({
                     onChange={(event, data) => onFreeInputChanged(data.value)}
                     placeholder='Saisissez ici une date libre en calendrier grégorien ou en calendrier révolutionnaire...'
                 />
-                */
+
             }
             <Segment>
                 <Grid columns={2} relaxed='very'>
@@ -89,7 +94,6 @@ const Converter = ({
                                 search
                                 selection
                                 value={gregorian_day || ''}
-                                defaultValue={gregorian_day || ''}
                                 options={gregorian_days_options}
                                 onChange={(event, data) => onGregorianChanged(data.value, gregorian_month, gregorian_year)}
                             />
@@ -99,7 +103,6 @@ const Converter = ({
                                 search
                                 selection
                                 value={gregorian_month_default || ''}
-                                defaultValue={gregorian_month_default || ''}
                                 options={gregorian_months_options}
                                 onChange={(event, data) => onGregorianChanged(gregorian_day, data.value, gregorian_year)}
                             />
@@ -122,11 +125,11 @@ const Converter = ({
                             <div className='ConverterField'>{gregorian_year}</div>
                         </Segment>
                         */}
-                        <p><CopyField text={gregorian_long} /></p>
-                        <p><CopyField text={gregorian_standard} /></p>
-                        <p><CopyField text={gregorian_short} /></p>
-                        <p><CopyField text={gregorian_iso} /></p>
-                        <p><CopyField text={gregorian_gedcom} /></p>
+                        <CopyField text={gregorian_long} />
+                        <CopyField text={gregorian_standard} />
+                        <CopyField text={gregorian_short} />
+                        <CopyField text={gregorian_iso} />
+                        <CopyField text={gregorian_gedcom} />
                     </Grid.Column>
                     <Grid.Column>
                         <Menu className='discreteMenu'>
@@ -136,7 +139,6 @@ const Converter = ({
                                 search
                                 selection
                                 value={frenchRepublican_day || ''}
-                                defaultValue={frenchRepublican_day || ''}
                                 options={frenchRepublican_days_options}
                                 onChange={(event, data) => onFrenchRepublicanChanged(data.value, frenchRepublican_month, frenchRepublican_year)}
                             />
@@ -146,7 +148,6 @@ const Converter = ({
                                 search
                                 selection
                                 value={frenchRepublican_month_default || ''}
-                                defaultValue={frenchRepublican_month_default || ''}
                                 options={frenchRepublican_months_options}
                                 onChange={(event, data) => onFrenchRepublicanChanged(frenchRepublican_day, data.value, frenchRepublican_year)}
                             />
@@ -158,7 +159,6 @@ const Converter = ({
                                 allowAdditions
                                 additionLabel='ou bien : '
                                 value={frenchRepublican_year || ''}
-                                defaultValue={frenchRepublican_year || ''}
                                 options={frenchRepublican_years_options}
                                 onChange={(event, data) => onFrenchRepublicanChanged(frenchRepublican_day, frenchRepublican_month, data.value)}
                             />
@@ -170,10 +170,10 @@ const Converter = ({
                             <div className='ConverterField'>{frenchRepublican_year}</div>
                         </Segment>
                         */}
-                        <p><CopyField text={frenchRepublican_long} /></p>
-                        <p><CopyField text={frenchRepublican_standard} /></p>
-                        <p><CopyField text={frenchRepublican_short} /></p>
-                        <p><CopyField text={frenchRepublican_iso} /></p>
+                        <CopyField text={frenchRepublican_long} />
+                        <CopyField text={frenchRepublican_standard} />
+                        <CopyField text={frenchRepublican_short} />
+                        <CopyField text={frenchRepublican_iso} />
                     </Grid.Column>
                 </Grid>
                 <Divider vertical><Icon fitted name='exchange'></Icon></Divider>

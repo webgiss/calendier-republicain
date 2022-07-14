@@ -92,7 +92,7 @@ export const frenchRepublican_months_abrev = [
     ['ms', 'me', 'mess'],
     ['th', 'tr', 'ther'],
     ['ft', 'fruc'],
-    ['jc', 'sp', 'cp'],
+    ['jc', 'js', 'sp', 'cp'],
 ]
 
 export const sans_culottides_days = [
@@ -147,19 +147,19 @@ export const get_gedcom_string = (year, month, day) => {
 }
 
 export const get_long_frenchRepublican_string = (year, month, day) => {
-    return `${frenchRepublican_day_of_week[(day - 1) % 10]} ${day} ${frenchRepublican_months[month - 1]} an ${stringify(year)} (${year})`
+    return `${frenchRepublican_day_of_week[(day - 1) % 10]} ${day}${month === 13 ? (day !== 1 ? "ème" : "er") : ""} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour complémentaire"} an ${year > 0 ? stringify(year) : stringify(1 - year) + " avant l'ère républicaine"} (${year})`
 }
 
 export const get_standard_frenchRepublican_string = (year, month, day) => {
-    return `${day} ${frenchRepublican_months[month - 1]} an ${stringify(year)}`
+    return `${day} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour comp."} an ${year > 0 ? stringify(year) : stringify(1 - year) + " av. rép."}`
 }
 
 export const get_short_frenchRepublican_string = (year, month, day) => {
-    return `${pad(day, 2)}/${pad(month, 2)}/${stringify(year)}`
+    return `${pad(day, 2)}/${pad(month, 2)}/${year > 0 ? stringify(year) : "[" + stringify(1 - year) + "]"}`
 }
 
 export const get_frenchRepublican_iso_string = (year, month, day) => {
-    return `${stringify(year)}-${pad(month, 2)}-${pad(day, 2)}`
+    return `${year > 0 ? stringify(year) : "[" + stringify(1 - year) + "]"}-${pad(month, 2)}-${pad(day, 2)}`
 }
 
 export const get_frenchRepublican_day_string = (year, month, day) => {

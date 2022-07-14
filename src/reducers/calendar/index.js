@@ -1,10 +1,9 @@
 // import { createSlice } from '@reduxjs/toolkit'
 import { createModule } from "saga-slice";
 import { frenchRepublicanToGregorian, get_frenchRepublican_iso_string, get_gedcom_string, get_iso_string, get_long_frenchRepublican_string, get_long_gregorian_string, get_short_frenchRepublican_string, get_short_gregorian_string, get_standard_frenchRepublican_string, get_standard_gregorian_string, gregorianToFrenchRepublican } from "../../tools/calendars";
+import { FORMAT_FRENCH_REPUBLICAN, FORMAT_GREGORIAN, parseDate } from '../../tools/dateParser'
 import exportOnWindow from "../../tools/exportOnWindow";
 import copy from 'copy-to-clipboard'
-
-exportOnWindow({get_long_gregorian_string})
 
 const setGregorian = (converter, year, month, day) => {
     converter.gregorian.day = day
@@ -70,29 +69,61 @@ const calendarSlice = createModule({
                 freeInput: '',
                 date: null,
             })
+            const idConv = state.converters.length - 1
+            const [year, month, day] = [1, 1, 1]
+            setFrenchRepublican(state.converters[idConv], year, month, day)
+            const [yearGr, monthGr, dayGr] = frenchRepublicanToGregorian(year, month, day)
+            setGregorian(state.converters[idConv], yearGr, monthGr, dayGr)
+            state.converters[idConv].freeInput = ''
+        },
+        removeConverter(state, payload) {
+            const { idConv } = payload
+            if (state.converters.length > idConv && idConv >= 0) {
+                state.converters.splice(idConv, 1)
+            }
         },
         setGregorian(state, payload) {
             const { idConv, day, month, year } = payload
             if (state.converters.length > idConv && idConv >= 0) {
-                setGregorian(state.converters[idConv], year, month, day)
-                const [yearFr, monthFr, dayFr] = gregorianToFrenchRepublican(year, month, day)
-                setFrenchRepublican(state.converters[idConv], yearFr, monthFr, dayFr)
-                state.freeInput = ''
+                try {
+                    const [yearFr, monthFr, dayFr] = gregorianToFrenchRepublican(year, month, day)
+                    setGregorian(state.converters[idConv], year, month, day)
+                    setFrenchRepublican(state.converters[idConv], yearFr, monthFr, dayFr)
+                } catch {
+                }
+                state.converters[idConv].freeInput = ''
             }
         },
         setFrenchRepublican(state, payload) {
             const { idConv, day, month, year } = payload
             if (state.converters.length > idConv && idConv >= 0) {
-                setFrenchRepublican(state.converters[idConv], year, month, day)
-                const [yearGr, monthGr, dayGr] = frenchRepublicanToGregorian(year, month, day)
-                setGregorian(state.converters[idConv], yearGr, monthGr, dayGr)
-                state.freeInput = ''
+                try {
+                    const [yearGr, monthGr, dayGr] = frenchRepublicanToGregorian(year, month, day)
+                    setFrenchRepublican(state.converters[idConv], year, month, day)
+                    setGregorian(state.converters[idConv], yearGr, monthGr, dayGr)
+                } catch {
+                }
+                state.converters[idConv].freeInput = ''
             }
         },
         changeFreeInput(state, payload) {
             const { idConv, freeInput } = payload
             if (state.converters.length > idConv && idConv >= 0) {
                 state.converters[idConv].freeInput = freeInput
+                try {
+                    const { format, year, month, day } = parseDate(freeInput)
+                    if (format === FORMAT_FRENCH_REPUBLICAN) {
+                        const [yearGr, monthGr, dayGr] = frenchRepublicanToGregorian(year, month, day)
+                        setFrenchRepublican(state.converters[idConv], year, month, day)
+                        setGregorian(state.converters[idConv], yearGr, monthGr, dayGr)
+                    } else if (format === FORMAT_GREGORIAN) {
+                        const [yearFr, monthFr, dayFr] = gregorianToFrenchRepublican(year, month, day)
+                        setGregorian(state.converters[idConv], year, month, day)
+                        setFrenchRepublican(state.converters[idConv], yearFr, monthFr, dayFr)
+                    }
+                } catch {
+                }
+
             }
         },
         copyToClipboard(state, payload) {

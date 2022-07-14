@@ -1,3 +1,4 @@
+import './CopyField.css'
 import { Input } from 'semantic-ui-react'
 
 const CopyField = ({ text, onCopy }) => {

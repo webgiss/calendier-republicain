@@ -1,4 +1,11 @@
 .Converter {
+    position: absolute;
+}
+
+.ConverterCloseButton {
+    position: absolute;
+    right: -25px;
+    top: -10px;
 }
 
 .ui.menu.discreteMenu {

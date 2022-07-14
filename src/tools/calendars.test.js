@@ -35,11 +35,12 @@ describe('get_long_frenchRepublican_string', () => {
         [[11, 10, 15], 'quintidi 15 messidor an XI (11)'],
         [[12, 11, 15], 'quintidi 15 thermidor an XII (12)'],
         [[13, 12, 15], 'quintidi 15 fructidor an XIII (13)'],
-        [[14, 13, 1], 'primidi 1 jours comp. an XIV (14)'],
-        [[15, 13, 2], 'duodi 2 jours comp. an XV (15)'],
-        [[16, 13, 3], 'tridi 3 jours comp. an XVI (16)'],
-        [[17, 13, 4], 'quartidi 4 jours comp. an XVII (17)'],
-        [[18, 13, 5], 'quintidi 5 jours comp. an XVIII (18)'],
+        [[14, 13, 1], 'primidi 1er jour complémentaire an XIV (14)'],
+        [[15, 13, 2], 'duodi 2ème jour complémentaire an XV (15)'],
+        [[16, 13, 3], 'tridi 3ème jour complémentaire an XVI (16)'],
+        [[17, 13, 4], 'quartidi 4ème jour complémentaire an XVII (17)'],
+        [[18, 13, 5], 'quintidi 5ème jour complémentaire an XVIII (18)'],
+        [[11, 13, 6], 'sextidi 6ème jour complémentaire an XI (11)'],
         [[231, 4, 17], 'septidi 17 nivôse an CCXXXI (231)'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
@@ -74,11 +75,12 @@ describe('get_standard_frenchRepublican_string', () => {
         [[11, 10, 15], '15 messidor an XI'],
         [[12, 11, 15], '15 thermidor an XII'],
         [[13, 12, 15], '15 fructidor an XIII'],
-        [[14, 13, 1], '1 jours comp. an XIV'],
-        [[15, 13, 2], '2 jours comp. an XV'],
-        [[16, 13, 3], '3 jours comp. an XVI'],
-        [[17, 13, 4], '4 jours comp. an XVII'],
-        [[18, 13, 5], '5 jours comp. an XVIII'],
+        [[14, 13, 1], '1 jour comp. an XIV'],
+        [[15, 13, 2], '2 jour comp. an XV'],
+        [[16, 13, 3], '3 jour comp. an XVI'],
+        [[17, 13, 4], '4 jour comp. an XVII'],
+        [[18, 13, 5], '5 jour comp. an XVIII'],
+        [[11, 13, 6], '6 jour comp. an XI'],
         [[231, 4, 17], '17 nivôse an CCXXXI'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
@@ -118,6 +120,7 @@ describe('get_frenchRepublican_iso_string', () => {
         [[16, 13, 3], 'XVI-13-03'],
         [[17, 13, 4], 'XVII-13-04'],
         [[18, 13, 5], 'XVIII-13-05'],
+        [[11, 13, 6], 'XI-13-06'],
         [[231, 4, 17], 'CCXXXI-04-17'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
@@ -157,6 +160,7 @@ describe('get_short_frenchRepublican_string', () => {
         [[16, 13, 3], '03/13/XVI'],
         [[17, 13, 4], '04/13/XVII'],
         [[18, 13, 5], '05/13/XVIII'],
+        [[11, 13, 6], '06/13/XI'],
         [[231, 4, 17], '17/04/CCXXXI'],
     ]
     for (const [inputValues, expectedResult] of testSet) {

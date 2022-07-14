@@ -31,6 +31,7 @@ const Converter = ({ idConv }) => {
     const onGregorianChanged = (day, month, year) => dispatch(actions.setGregorian({ idConv, day, month, year }))
     const onFrenchRepublicanChanged = (day, month, year) => dispatch(actions.setFrenchRepublican({ idConv, day, month, year }))
     const onFreeInputChanged = (freeInput) => dispatch(actions.changeFreeInput({ idConv, freeInput }))
+    const onClose = () => dispatch(actions.removeConverter({ idConv }))
 
     return Internal({
         idConv,
@@ -41,7 +42,8 @@ const Converter = ({ idConv }) => {
         freeInput,
         onGregorianChanged,
         onFrenchRepublicanChanged,
-        onFreeInputChanged
+        onFreeInputChanged,
+        onClose
     })
 }
 
