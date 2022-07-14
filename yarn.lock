@@ -4172,6 +4172,7 @@ __metadata:
     connected-react-router: ^6.9.2
     copy-to-clipboard: ^3.3.1
     history: 4.10.1
+    jest-html-reporters: ^3.0.10
     react: ^18.1.0
     react-dom: ^18.1.0
     react-redux: ^8.0.1
@@ -7806,6 +7807,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-html-reporters@npm:^3.0.10":
+  version: 3.0.10
+  resolution: "jest-html-reporters@npm:3.0.10"
+  dependencies:
+    fs-extra: ^9.0.1
+    open: ^8.0.3
+  checksum: 23f3b01746e233ce6b4e67553b6354bb422c135c435648c49050215207ef068bf2764dc802cfc84a4b3ce310bf6fc318c04b99ce921f218464173fe82a1698ff
+  languageName: node
+  linkType: hard
+
 "jest-jasmine2@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-jasmine2@npm:27.5.1"
@@ -9287,7 +9298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"open@npm:^8.0.9, open@npm:^8.4.0":
+"open@npm:^8.0.3, open@npm:^8.0.9, open@npm:^8.4.0":
   version: 8.4.0
   resolution: "open@npm:8.4.0"
   dependencies:

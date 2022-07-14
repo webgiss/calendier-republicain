@@ -37,7 +37,7 @@ jobs:
                   yarn
                   PUBLIC_URL=/calendrier-republicain yarn build
                   # yarn build-storybook
-                  # yarn test:html
+                  yarn test:html
 
             - name: "Create calendrier-republicain assets"
               run: |
@@ -45,7 +45,7 @@ jobs:
 
                   site_name="calendrier-republicain-site-${ref#refs/tags/v*}"
                   # storybook_name="calendrier-republicain-storybook-${ref#refs/tags/v*}"
-                  # test_name="calendrier-republicain-test-${ref#refs/tags/v*}"
+                  test_name="calendrier-republicain-test-${ref#refs/tags/v*}"
 
                   mv "build" "${site_name}"
                   zip -r "${site_name}.zip" "${site_name}"
@@ -57,15 +57,17 @@ jobs:
                   # tar cvzf "${storybook_name}.tar.gz" "${storybook_name}"
                   # mv "${storybook_name}" storybook
 
-                  # mv "jest_html_reporters.html" "${test_name}.html"
-                  # cp "${test_name}.html" "test.html"
+                  mv "jest_html_reporters.html" "${test_name}.html"
+                  zip -r "${test_name}.zip" "${test_name}.html" "jest-html-reporters-attach"
+                  mv "${test_name}.html" "test.html"
 
             - name: "Move storybook to build dir"
               run: |
                   # echo "calendrier-republicain.top" > build/CNAME
                   # mv storybook build/storybook
-                  # mkdir -p build/test
-                  # mv test.html build/test/index.html
+                  mkdir -p build/test
+                  mv test.html build/test/index.html
+                  mv jest-html-reporters-attach build/test/
                   touch build/.nojekyll
 
             - name: "Deploy to GitHub Pages"
@@ -86,6 +88,5 @@ jobs:
                   files: |
                     calendrier-republicain-*.zip
                     calendrier-republicain-*.tar.gz
-                    calendrier-republicain-*.html
                   draft: false
                   prerelease: false

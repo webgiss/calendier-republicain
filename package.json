@@ -27,6 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:html": "react-scripts test --reporters=\"jest-html-reporters\" --all",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,5 +50,8 @@
   },
   "license": "MIT",
   "author": "gissehel",
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "devDependencies": {
+    "jest-html-reporters": "^3.0.10"
+  }
 }
