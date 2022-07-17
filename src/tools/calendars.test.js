@@ -42,6 +42,7 @@ describe('get_long_frenchRepublican_string', () => {
         [[18, 13, 5], 'quintidi 5ème jour complémentaire an XVIII (18)'],
         [[11, 13, 6], 'sextidi 6ème jour complémentaire an XI (11)'],
         [[231, 4, 17], 'septidi 17 nivôse an CCXXXI (231)'],
+        [[-3, 4, 17], 'septidi 17 nivôse an IV (4) avant l\'ère républicaine'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
         it(`should return "${expectedResult}" when provided with (${inputValues.map(x => `${x}`).join(',')})`, () => {
@@ -82,6 +83,7 @@ describe('get_standard_frenchRepublican_string', () => {
         [[18, 13, 5], '5 jour comp. an XVIII'],
         [[11, 13, 6], '6 jour comp. an XI'],
         [[231, 4, 17], '17 nivôse an CCXXXI'],
+        [[-3, 4, 17], '17 nivôse an IV av. rép.'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
         it(`should return "${expectedResult}" when provided with (${inputValues.map(x => `${x}`).join(',')})`, () => {
@@ -122,6 +124,7 @@ describe('get_frenchRepublican_iso_string', () => {
         [[18, 13, 5], 'XVIII-13-05'],
         [[11, 13, 6], 'XI-13-06'],
         [[231, 4, 17], 'CCXXXI-04-17'],
+        [[-3, 4, 17], '[IV]-04-17'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
         it(`should return "${expectedResult}" when provided with (${inputValues.map(x => `${x}`).join(',')})`, () => {
@@ -162,6 +165,7 @@ describe('get_short_frenchRepublican_string', () => {
         [[18, 13, 5], '05/13/XVIII'],
         [[11, 13, 6], '06/13/XI'],
         [[231, 4, 17], '17/04/CCXXXI'],
+        [[-3, 4, 17], '17/04/[IV]'],
     ]
     for (const [inputValues, expectedResult] of testSet) {
         it(`should return "${expectedResult}" when provided with (${inputValues.map(x => `${x}`).join(',')})`, () => {

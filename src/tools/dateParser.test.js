@@ -551,7 +551,9 @@ describe('parseDate', () => {
         ['janvier 1972', { format: FORMAT_UNKNOWN }],
         ['vendémiaire CCXXX', { format: FORMAT_UNKNOWN }],
 
+        ['sextidi 26 messidor an IV (4) avant l\'ère républicaine', { year: -3, month: 10, day: 26, format: FORMAT_FRENCH_REPUBLICAN }],
         ['sextidi 26 messidor an IV avant l\'ère républicaine', { year: -3, month: 10, day: 26, format: FORMAT_FRENCH_REPUBLICAN }],
+        ['sextidi 26 messidor IV (4) avant l\'ère républicaine', { year: -3, month: 10, day: 26, format: FORMAT_FRENCH_REPUBLICAN }],
         ['sextidi 26 messidor IV avant l\'ère républicaine', { year: -3, month: 10, day: 26, format: FORMAT_FRENCH_REPUBLICAN }],
         ['26 messidor an IV av. rép.', { year: -3, month: 10, day: 26, format: FORMAT_FRENCH_REPUBLICAN }],
         ['26 messidor an 4 av. rép.', { year: -3, month: 10, day: 26, format: FORMAT_FRENCH_REPUBLICAN }],

@@ -158,7 +158,7 @@ const Converter = ({
                                 selection
                                 allowAdditions
                                 additionLabel='ou bien : '
-                                value={frenchRepublican_year || ''}
+                                value={frenchRepublican_year !== null ? frenchRepublican_year : ''}
                                 options={frenchRepublican_years_options}
                                 onChange={(event, data) => onFrenchRepublicanChanged(frenchRepublican_day, frenchRepublican_month, data.value)}
                             />

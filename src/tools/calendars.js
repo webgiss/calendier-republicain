@@ -147,7 +147,7 @@ export const get_gedcom_string = (year, month, day) => {
 }
 
 export const get_long_frenchRepublican_string = (year, month, day) => {
-    return `${frenchRepublican_day_of_week[(day - 1) % 10]} ${day}${month === 13 ? (day !== 1 ? "ème" : "er") : ""} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour complémentaire"} an ${year > 0 ? stringify(year) : stringify(1 - year) + " avant l'ère républicaine"} (${year})`
+    return `${frenchRepublican_day_of_week[(day - 1) % 10]} ${day}${month === 13 ? (day !== 1 ? "ème" : "er") : ""} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour complémentaire"} an ${year > 0 ? stringify(year) : stringify(1 - year)} (${year > 0 ? year : 1 - year})${year > 0 ? "" : " avant l'ère républicaine"}`
 }
 
 export const get_standard_frenchRepublican_string = (year, month, day) => {
