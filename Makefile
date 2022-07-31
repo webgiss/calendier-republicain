@@ -43,5 +43,19 @@ milestone-release:
 	git push
 	git push --tags
 
+major-release:
+	bash -c '! [[ `git status --porcelain` ]]' || (echo "You must have commited everything before running a release" && false)
+	yarn version major
+	git add .
+	git commit -m "v$$($(VERSION_CHECKER))"
+	git tag "v$$($(VERSION_CHECKER))"
+	yarn version major
+	yarn version minor
+	yarn version patch
+	git add .
+	git commit -m "v$$($(VERSION_CHECKER)) : Start new developement major"
+	git push
+	git push --tags
+
 info:
 	@echo $(APP_VERSION)
