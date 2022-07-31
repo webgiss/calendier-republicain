@@ -1,6 +1,6 @@
 {
   "name": "calendrier-republicain",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.14.1",
