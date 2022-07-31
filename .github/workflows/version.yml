@@ -18,33 +18,3 @@ jobs:
                   git config --global user.name "Gissehel"
                   git config --global user.email "gissehel@users.noreply.github.com"
                   make release
-
-    new_milestone_version:
-        name: Create a new milestone version
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                token: ${{ secrets.TOKEN_FOR_GIT }}
-
-            - name: Create a new version (milestone)
-              shell: bash
-              run: |
-                  git config --global user.name "Gissehel"
-                  git config --global user.email "gissehel@users.noreply.github.com"
-                  make milestone-release
-
-    new_major_version:
-        name: Create a new major version
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                token: ${{ secrets.TOKEN_FOR_GIT }}
-
-            - name: Create a new version (major)
-              shell: bash
-              run: |
-                  git config --global user.name "Gissehel"
-                  git config --global user.email "gissehel@users.noreply.github.com"
-                  make major-release
