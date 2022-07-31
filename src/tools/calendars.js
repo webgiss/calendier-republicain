@@ -2,6 +2,15 @@ import { french_revolutionary_to_jd, gregorian_to_jd, jd_to_french_revolutionary
 import exportOnWindow from "./exportOnWindow"
 import { stringify } from "./roman"
 
+export const romanStringify = (n) => {
+    try {
+        return stringify(n)
+    } catch {
+        // If it's more than the max number in roman numeral
+        return `${n}`
+    }
+}
+
 export const gregorian_months = [
     'janvier', 'février', 'mars',
     'avril', 'mai', 'juin',
@@ -147,19 +156,19 @@ export const get_gedcom_string = (year, month, day) => {
 }
 
 export const get_long_frenchRepublican_string = (year, month, day) => {
-    return `${frenchRepublican_day_of_week[(day - 1) % 10]} ${day}${month === 13 ? (day !== 1 ? "ème" : "er") : ""} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour complémentaire"} an ${year > 0 ? stringify(year) : stringify(1 - year)} (${year > 0 ? year : 1 - year})${year > 0 ? "" : " avant l'ère républicaine"}`
+    return `${frenchRepublican_day_of_week[(day - 1) % 10]} ${day}${month === 13 ? (day !== 1 ? "ème" : "er") : ""} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour complémentaire"} an ${year > 0 ? romanStringify(year) : romanStringify(1 - year)} (${year > 0 ? year : 1 - year})${year > 0 ? "" : " avant l'ère républicaine"}`
 }
 
 export const get_standard_frenchRepublican_string = (year, month, day) => {
-    return `${day} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour comp."} an ${year > 0 ? stringify(year) : stringify(1 - year) + " av. rép."}`
+    return `${day} ${month !== 13 ? frenchRepublican_months[month - 1] : "jour comp."} an ${year > 0 ? romanStringify(year) : romanStringify(1 - year) + " av. rép."}`
 }
 
 export const get_short_frenchRepublican_string = (year, month, day) => {
-    return `${pad(day, 2)}/${pad(month, 2)}/${year > 0 ? stringify(year) : "[" + stringify(1 - year) + "]"}`
+    return `${pad(day, 2)}/${pad(month, 2)}/${year > 0 ? romanStringify(year) : "[" + romanStringify(1 - year) + "]"}`
 }
 
 export const get_frenchRepublican_iso_string = (year, month, day) => {
-    return `${year > 0 ? stringify(year) : "[" + stringify(1 - year) + "]"}-${pad(month, 2)}-${pad(day, 2)}`
+    return `${year > 0 ? romanStringify(year) : "[" + romanStringify(1 - year) + "]"}-${pad(month, 2)}-${pad(day, 2)}`
 }
 
 export const get_frenchRepublican_day_string = (year, month, day) => {

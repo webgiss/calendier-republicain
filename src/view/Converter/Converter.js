@@ -7,11 +7,11 @@ import {
     Icon, Grid, Divider,
 } from 'semantic-ui-react'
 import {
+    romanStringify,
     gregorian_months,
     frenchRepublican_months,
     get_frenchRepublican_day_string,
 } from '../../tools/calendars'
-import { stringify } from '../../tools/roman'
 import exportOnWindow from '../../tools/exportOnWindow'
 import CopyField from '../CopyField'
 
@@ -25,6 +25,17 @@ const createOptions = (items) => items.map(item => createOption(item))
 const createArrayOptions1 = (items, array) => items.map(item => createArrayOption1(item, array))
 const createFunctionOptions = (items, f) => items.map(item => createFunctionOption(item, f))
 
+const getArrayOptionsItem = (arrayOptions, month) => {
+    if (month !== null) {
+        try {
+            return arrayOptions[month - 1].value
+        }
+        catch {
+        }
+    }
+    return undefined
+}
+
 const Converter = ({
     idConv,
     gregorian_day, gregorian_month, gregorian_year,
@@ -37,7 +48,8 @@ const Converter = ({
     onFreeInputChanged,
     onClose
 }) => {
-    const year_to_string = (n) => n === null ? '' : `An ${n > 0 ? stringify(n) : stringify(1-n) + ' av. rép.'}`
+    
+    const year_to_string = (n) => n === null ? '' : `An ${n > 0 ? romanStringify(n) : romanStringify(1-n) + ' av. rép.'}`
 
     exportOnWindow({ year_to_string })
     const gregorian_days_options = createOptions([...new Array(31).keys()].map(x => x + 1))
@@ -56,8 +68,8 @@ const Converter = ({
     const frenchRepublican_months_options = createArrayOptions1([...new Array(13).keys()].map(m => m + 1), frenchRepublican_months)
     const frenchRepublican_years_options = createFunctionOptions([...new Array(14).keys()].map(x => 1 + x), year_to_string)
 
-    const gregorian_month_default = gregorian_month !== null ? gregorian_months_options[gregorian_month - 1].value : undefined
-    const frenchRepublican_month_default = frenchRepublican_month !== null ? frenchRepublican_months_options[frenchRepublican_month - 1].value : undefined
+    const gregorian_month_default = getArrayOptionsItem(gregorian_months_options, gregorian_month)
+    const frenchRepublican_month_default = getArrayOptionsItem(frenchRepublican_months_options, frenchRepublican_month)
 
     if (frenchRepublican_year !== null) {
         if (frenchRepublican_year < 1) {
