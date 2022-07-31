@@ -428,9 +428,14 @@ function annee_da_la_revolution(jd) {
         lasteq, nexteq, adr;
 
     lasteq = paris_equinoxe_jd(guess);
+    let count = 0
     while (lasteq > jd) {
         guess--;
         lasteq = paris_equinoxe_jd(guess);
+        count++;
+        if (count > 50) {
+            throw new Error('Too many iterations to compute equinox')
+        }
     }
     nexteq = lasteq - 1;
     while (!((lasteq <= jd) && (jd < nexteq))) {
