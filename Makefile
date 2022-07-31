@@ -49,7 +49,6 @@ major-release:
 	git add .
 	git commit -m "v$$($(VERSION_CHECKER))"
 	git tag "v$$($(VERSION_CHECKER))"
-	yarn version major
 	yarn version minor
 	yarn version patch
 	git add .
